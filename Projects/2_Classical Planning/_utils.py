@@ -6,6 +6,7 @@ from aimacode.logic import associate
 from aimacode.search import InstrumentedProblem
 from aimacode.utils import expr
 
+import numpy as np
 
 class PrintableProblem(InstrumentedProblem):
     """ InstrumentedProblem keeps track of stats during search, and this class
@@ -28,6 +29,14 @@ def run_search(problem, search_function, parameter=None):
     print("{}\n".format(ip))
     show_solution(node, end - start)
     print()
+
+    print('Airports:', problem.airports)
+    print('Cargos:', problem.cargos)
+    print('Planes:', problem.planes)
+    print('Goal:', problem.goal)
+    x = np.array(problem.state_map)
+    index = np.where(np.array(problem.initial_state_TF) == True)
+    print('Initial State:', x[index])
 
 
 def show_solution(node, elapsed_time):
